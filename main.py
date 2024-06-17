@@ -2,17 +2,9 @@ import pysnow
 import requests
 import logging
 from logs.logs import createLogFile
-import datetime
 from config import ConfigVariable
 import sys
-##############################################################################################
-####                                                                                      ####
-####                                  For Error logging                                   ####
-####                                                                                      ####
-##############################################################################################
-log_file_path = createLogFile(ConfigVariable.log_folder_path)
-flog_fname = datetime.datetime.now().strftime('%b_%Y.txt')
-logging.basicConfig(level=logging.INFO, filename=log_file_path.name, filemode="a", format="%(asctime)s %(levelname)s %(message)s")
+
 
 
 ##############################################################################################
@@ -78,6 +70,14 @@ def fetchIncidetn(incident, username, password):
                logging.info(f"Auto assigned Updates: INC Number: {records['number']}, Assigned group: {get_assign_group_name}, assigned_to:beth.anglin@example.com")
      return {"status":"Successfull"}
 
+##############################################################################################
+####                                                                                      ####
+####                                  For Error logging                                   ####
+####                                                                                      ####
+##############################################################################################
+log_file_path = createLogFile(ConfigVariable.log_folder_path)
+
+logging.basicConfig(level=logging.INFO, filename=log_file_path.name, filemode="a", format="%(asctime)s %(levelname)s %(message)s")
 
 def main():
      fetchIncidetn(incident, username, password)
